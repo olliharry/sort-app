@@ -4,19 +4,18 @@ import Column from "./components/column";
 import { useEffect, useState } from "react";
 import bubbleSort from "./utils/bubbleSort";
 
-export default function Home() {
+export default function Home() {  
   const initialArray = Array.from(
     { length: 10 },
     () => Math.floor(Math.random() * (600 - 50 + 1)) + 50
   );
   const [heightArray, setHeightArray] = useState(initialArray);
-
+  
   function sort() {
     const v = bubbleSort(heightArray);
-    console.log(heightArray);
-    setHeightArray(v);
+    console.log(v);
+    setHeightArray([...v]);
   }
-  
 
   return (
     <main className="container">

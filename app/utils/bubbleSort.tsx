@@ -9,7 +9,6 @@ const bubbleSort = (arr: number[]): number[] => {
                 // Swap elements
                 [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
                 swapped = true;
-                
             }
         }
     } while (swapped);
