@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 .column {
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(244, 133, 14);
   width: 6px;
 }
 
 .comparing {
-  background-color: rgb(255, 0, 0);
+  background-color: rgb(44, 29, 251);
   width: 6px;
 }
 
