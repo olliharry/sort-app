@@ -1,11 +1,12 @@
 import { sleep } from "./sleep";
 
-async function merge(left: number[], right: number[]): Promise<number[]> {
+async function merge(setComparingIndices: React.Dispatch<React.SetStateAction<number[]>>,left: number[], right: number[],sleepDuration: number,startIndex: number, currentArray: number[], setHeightArray: React.Dispatch<React.SetStateAction<number[]>>,): Promise<number[]> {
   const result = [];
   let leftIndex = 0;
   let rightIndex = 0;
 
   while (leftIndex < left.length && rightIndex < right.length) {
+    setComparingIndices([startIndex + leftIndex, startIndex + left.length + rightIndex]);
     if (left[leftIndex] < right[rightIndex]) {
       result.push(left[leftIndex]);
       leftIndex++;
@@ -13,16 +14,32 @@ async function merge(left: number[], right: number[]): Promise<number[]> {
       result.push(right[rightIndex]);
       rightIndex++;
     }
-  }
 
-  return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+    const newArray = [...currentArray];
+    newArray.splice(startIndex, result.length, ...result);
+    setHeightArray(newArray);
+    await sleep(sleepDuration);
+  }
+  setComparingIndices([]);
+  const finalResult = result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+
+  // Ensure the full array is updated with the final merged result
+  const newArray = [...currentArray];
+  newArray.splice(startIndex, finalResult.length, ...finalResult);
+  setHeightArray(newArray);
+  currentArray.splice(startIndex, finalResult.length, ...finalResult);
+
+  return finalResult;
+ 
 }
 
 export async function mergeSort(
   arr: number[],
   setHeightArray: React.Dispatch<React.SetStateAction<number[]>>,
   setComparingIndices: React.Dispatch<React.SetStateAction<number[]>>,
-  sleepDuration: number
+  sleepDuration: number,
+  currentArray: number[],
+  startIndex: number,
 ): Promise<number[]> {
   if (arr.length <= 1) {
     return arr;
@@ -36,19 +53,21 @@ export async function mergeSort(
     left,
     setHeightArray,
     setComparingIndices,
-    sleepDuration
+    sleepDuration,
+    currentArray, 
+    startIndex
   );
   const sortedRight = await mergeSort(
     right,
     setHeightArray,
     setComparingIndices,
-    sleepDuration
+    sleepDuration, 
+    currentArray, 
+    startIndex+middle,
   );
 
-  const d = await merge(sortedLeft, sortedRight);
-  await sleep(sleepDuration);
+  const d = await merge(setComparingIndices, sortedLeft, sortedRight,sleepDuration, startIndex, currentArray, setHeightArray);
+  
   setHeightArray([...d]);
   return d;
-
-  //return merge(mergeSort(left, setHeightArray, setComparingIndices, sleepDuration), mergeSort(right, setHeightArray, setComparingIndices, sleepDuration));
 }

@@ -39,7 +39,9 @@ export default function Home() {
       heightArray,
       setHeightArray,
       setComparingIndices,
-      sleepDuration
+      sleepDuration,
+      heightArray, 
+      0
     );
   }
 
