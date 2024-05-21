@@ -12,14 +12,26 @@
   width: 6px;
 }
 
+.buttonContainer{
+  display: flex;
+  justify-content: space-around;
+}
+
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   height: 100vh;
 }
 
 .columnContainer {
   display: flex;
+  height: 80%;
   gap: 3px;
+}
+
+
+.button{
+  background-color: rgb(230, 25, 141);
+  color: aliceblue;
+  border-radius: 5px;
 }

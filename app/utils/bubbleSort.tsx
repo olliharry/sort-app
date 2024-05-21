@@ -1,10 +1,10 @@
 import { sleep } from "./sleep";
 
 export async function bubbleSort(
+  sleepDurationRef: React.MutableRefObject<number>,
   arr: number[],
   setHeightArray: React.Dispatch<React.SetStateAction<number[]>>,
   setComparingIndices: React.Dispatch<React.SetStateAction<number[]>>,
-  sleepDuration: number
 ): Promise<number[] | -1> {
   const len = arr.length;
   let swapped: boolean;
@@ -17,7 +17,7 @@ export async function bubbleSort(
         setComparingIndices([i, i + 1]);
         [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
         swapped = true;
-        await sleep(sleepDuration);
+        await sleep(sleepDurationRef.current);
         setHeightArray([...arr]);
       }
     }

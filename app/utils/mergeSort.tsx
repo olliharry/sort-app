@@ -14,7 +14,6 @@ async function merge(setComparingIndices: React.Dispatch<React.SetStateAction<nu
       result.push(right[rightIndex]);
       rightIndex++;
     }
-
     const newArray = [...currentArray];
     newArray.splice(startIndex, result.length, ...result);
     setHeightArray(newArray);
@@ -23,10 +22,6 @@ async function merge(setComparingIndices: React.Dispatch<React.SetStateAction<nu
   setComparingIndices([]);
   const finalResult = result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
 
-  // Ensure the full array is updated with the final merged result
-  const newArray = [...currentArray];
-  newArray.splice(startIndex, finalResult.length, ...finalResult);
-  setHeightArray(newArray);
   currentArray.splice(startIndex, finalResult.length, ...finalResult);
 
   return finalResult;
@@ -44,6 +39,7 @@ export async function mergeSort(
   if (arr.length <= 1) {
     return arr;
   }
+
 
   const middle = Math.floor(arr.length / 2);
   const left = arr.slice(0, middle);
