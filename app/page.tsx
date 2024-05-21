@@ -37,10 +37,10 @@ export default function Home() {
   }
   async function merge() {
     await mergeSort(
+      sleepDurationRef,
       heightArray,
       setHeightArray,
       setComparingIndices,
-      sleepDuration,
       heightArray, 
       0
     );
