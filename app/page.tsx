@@ -4,6 +4,7 @@ import Column from "./components/column";
 import { useEffect, useState, useRef } from "react";
 import bubbleSort from "./utils/bubbleSort";
 import { mergeSort } from "./utils/mergeSort";
+import { quickSort } from "./utils/quickSort";
 
 function generateInitialArray() {
   const initialArray = [];
@@ -17,6 +18,7 @@ export default function Home() {
   const [heightArray, setHeightArray] = useState<number[]>([]);
   const [comparingIndices, setComparingIndices] = useState<number[]>([]);
   const [sleepDuration, setSleepDuration] = useState<number>(1);
+  const [pivotIndex, setPivotIndex] = useState<number | undefined>();
   const sleepDurationRef = useRef<number>(100);
   useEffect(() => {
     const initialArray = generateInitialArray();
@@ -28,7 +30,7 @@ export default function Home() {
       sleepDurationRef,
       heightArray,
       setHeightArray,
-      setComparingIndices,
+      setComparingIndices
     );
   }
   function randomize() {
@@ -41,12 +43,24 @@ export default function Home() {
       heightArray,
       setHeightArray,
       setComparingIndices,
-      heightArray, 
+      heightArray,
       0
     );
   }
 
-  function reset(){
+  async function quick() {
+    await quickSort(
+      setPivotIndex,
+      heightArray,
+      0,
+      heightArray.length - 1,
+      setHeightArray,
+      setComparingIndices,
+      sleepDurationRef
+    );
+  }
+
+  function reset() {
     window.location.reload();
   }
 
@@ -57,29 +71,42 @@ export default function Home() {
           <Column
             key={index}
             height={height}
-            className={comparingIndices.includes(index) ? "comparing" : ""}
+            className={`${
+              comparingIndices.includes(index) ? "comparing" : ""
+            } ${index === pivotIndex ? "pivot" : ""}`}
           />
         ))}
       </div>
       <div className="buttonContainer">
-      <button className="button" onClick={() => sort()}>Bubble Sort</button>
-      <button className="button" onClick={() => merge()}>Merge Sort</button>
-      <button className="button" onClick={() => randomize()}>Generate Random Array</button>
-      <button className="button" onClick={() => reset()}>Reset</button>
-      <div>
-      <label htmlFor="speedRange">Animation Speed:  </label>
-      <input
-        type="range"
-        min="1"
-        max="100"
-        step="1"
-        value={100-sleepDurationRef.current+1}
-        onChange={(e) => sleepDurationRef.current = 100 - Number(e.target.value) + 1/*setSleepDuration(100 - Number(e.target.value)+1)*/}
-      />
+        <button className="button" onClick={() => sort()}>
+          Bubble Sort
+        </button>
+        <button className="button" onClick={() => merge()}>
+          Merge Sort
+        </button>
+        <button className="button" onClick={() => quick()}>
+          Quick Sort
+        </button>
+        <button className="button" onClick={() => randomize()}>
+          Generate Random Array
+        </button>
+        <button className="button" onClick={() => reset()}>
+          Reset
+        </button>
+        <div>
+          <label htmlFor="speedRange">Animation Speed: </label>
+          <input
+            type="range"
+            min="1"
+            max="100"
+            step="1"
+            value={100 - sleepDurationRef.current + 1}
+            onChange={(e) =>
+              (sleepDurationRef.current = 100 - Number(e.target.value) + 1)
+            }
+          />
+        </div>
       </div>
-      
-      </div>
-      
     </main>
   );
 }

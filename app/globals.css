@@ -12,6 +12,11 @@
   width: 6px;
 }
 
+.pivot{
+  background-color: rgb(0, 255, 94);
+  width: 6px;
+}
+
 .buttonContainer{
   display: flex;
   justify-content: space-around;
