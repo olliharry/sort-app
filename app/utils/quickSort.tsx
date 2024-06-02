@@ -1,4 +1,6 @@
 import { sleep } from "./sleep";
+//goals: combine pages to 1 url.
+// create header and better ui
 
 async function partition(
   setPivotIndex: React.Dispatch<React.SetStateAction<number | undefined>>,

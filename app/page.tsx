@@ -9,7 +9,7 @@ import { quickSort } from "./utils/quickSort";
 function generateInitialArray() {
   const initialArray = [];
   for (let i = 0; i < 150; i++) {
-    initialArray.push(Math.floor(Math.random() * (600 - 50 + 1)) + 50);
+    initialArray.push(Math.floor(Math.random() * (700 - 50 + 1)) + 50);
   }
   return initialArray;
 }
@@ -17,7 +17,6 @@ function generateInitialArray() {
 export default function Home() {
   const [heightArray, setHeightArray] = useState<number[]>([]);
   const [comparingIndices, setComparingIndices] = useState<number[]>([]);
-  const [sleepDuration, setSleepDuration] = useState<number>(1);
   const [pivotIndex, setPivotIndex] = useState<number | undefined>();
   const sleepDurationRef = useRef<number>(100);
   useEffect(() => {
@@ -65,19 +64,8 @@ export default function Home() {
   }
 
   return (
-    <main className="container">
-      <div className="columnContainer">
-        {heightArray.map((height, index) => (
-          <Column
-            key={index}
-            height={height}
-            className={`${
-              comparingIndices.includes(index) ? "comparing" : ""
-            } ${index === pivotIndex ? "pivot" : ""}`}
-          />
-        ))}
-      </div>
-      <div className="buttonContainer">
+    <main className="flex flex-col h-screen w-screen bg-gray-700">
+      <div className="bar">
         <button className="button" onClick={() => sort()}>
           Bubble Sort
         </button>
@@ -107,6 +95,19 @@ export default function Home() {
           />
         </div>
       </div>
+      {
+        <div className="columnContainer">
+          {heightArray.map((height, index) => (
+            <Column
+              key={index}
+              height={height}
+              className={`${
+                comparingIndices.includes(index) ? "comparing" : ""
+              } ${index === pivotIndex ? "pivot" : ""}`}
+            />
+          ))}
+        </div>
+      }
     </main>
   );
 }
