@@ -1,11 +1,19 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SortingVisualiser from "./sortingVisualiser";
 import SearchVisualiser from "./searchVisualiser";
-import { ReactDOM } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const Page: React.FC = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
   const router = createBrowserRouter([
     {
       path: "/",
@@ -18,9 +26,6 @@ const Page: React.FC = () => {
       errorElement: <div>404 Not Found</div>,
     },
   ]);
-  useEffect(() => {
-    alert("Finished loading");
-  }, []);
 
   return (
     <div>
