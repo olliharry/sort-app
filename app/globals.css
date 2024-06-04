@@ -67,3 +67,54 @@
   outline: none;
   box-shadow: 0 0 0 3px rgba(89, 201, 165, 0.5);
 }
+
+.containerSearch {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
+
+  background-color: #465775;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+  row-gap: 1px;
+  column-gap: 5px;
+  width: 700px;
+}
+
+.cell {
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.start {
+  background-color: #00f;
+}
+
+.end {
+  background-color: #f00;
+}
+
+.wall {
+  background-color: #333;
+}
+
+.path {
+  background-color: #0f0;
+}
+
+.visited {
+  background-color: aqua;
+}
+
+.textSearch {
+  color: aliceblue;
+  font-size: 16px;
+  font-weight: bold;
+}
