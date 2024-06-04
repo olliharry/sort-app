@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import SortingVisualiser from "./sortingVisualiser";
 import SearchVisualiser from "./searchVisualiser";
 import { ReactDOM } from "react";
@@ -18,6 +18,9 @@ const Page: React.FC = () => {
       errorElement: <div>404 Not Found</div>,
     },
   ]);
+  useEffect(() => {
+    alert("Finished loading");
+  }, []);
 
   return (
     <div>
