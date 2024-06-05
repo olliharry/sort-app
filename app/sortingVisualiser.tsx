@@ -86,7 +86,9 @@ export default function SortingVisualiser() {
           Reset
         </button>
         <div>
-          <label htmlFor="speedRange">Animation Speed: </label>
+          <label htmlFor="speedRange" className="textSearch">
+            Animation Speed:{" "}
+          </label>
           <input
             type="range"
             min="1"

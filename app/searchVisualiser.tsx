@@ -53,10 +53,8 @@ export default function SearchVisualiser() {
   return (
     <div className="containerSearch">
       <div className="bar">
-        <Link to="/..">
-          <button className="button">
-            Go to Sorting Visualiser
-          </button>
+        <Link to="/">
+          <button className="button">Go to Sorting Visualiser</button>
         </Link>
         <button
           onClick={() => bfsClicked()}
